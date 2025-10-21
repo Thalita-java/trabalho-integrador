@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.senai.infob.treino.models.Nivel;
 import com.senai.infob.treino.services.NivelService;
 
 
-@RestControllerAdvice
+@RestController
 @RequestMapping("/nivel")
 public class NivelController {
     
