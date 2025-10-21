@@ -1,7 +1,7 @@
 package com.senai.infob.treino.models;
 
 import java.util.List;
-import java.util.Set;
+
 
 import com.senai.infob.treino.enums.Idioma;
 
@@ -15,7 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -39,13 +39,13 @@ public class Usuario {
     @Column(name = "senha")
     private String senha;
 
-    @ManyToOne
+    @OneToMany
     @JoinTable(
         name = "usuario_responsavel",
         joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "responsavel_id", referencedColumnName = "id")
         )
-        private Set<Responsavel> responsavel;
+        private List<Responsavel> responsavel;
 
 
     @ManyToMany
@@ -59,7 +59,7 @@ public class Usuario {
 
     @OneToOne
     @JoinColumn(name = "agenda_id", nullable = false)
-    private Usuario usuario;
+    private Agenda agenda;
 
     @Enumerated(EnumType.STRING)
     @Column(name="idioma")
@@ -70,7 +70,7 @@ public class Usuario {
 
 
     public Usuario(Integer id, String nome, String idade, String emailResponsavel, String senha,
-            Set<Responsavel> responsavel, List<Nivel> nivel, Usuario usuario, Idioma idioma) {
+            List<Responsavel> responsavel, List<Nivel> nivel, Agenda agenda, Idioma idioma) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -78,7 +78,7 @@ public class Usuario {
         this.senha = senha;
         this.responsavel = responsavel;
         this.nivel = nivel;
-        this.usuario = usuario;
+        this.agenda = agenda;
         this.idioma = idioma;
     }
 
@@ -133,12 +133,12 @@ public class Usuario {
     }
 
 
-    public Set<Responsavel> getResponsavel() {
+    public List<Responsavel> getResponsavel() {
         return responsavel;
     }
 
 
-    public void setResponsavel(Set<Responsavel> responsavel) {
+    public void setResponsavel(List<Responsavel> responsavel) {
         this.responsavel = responsavel;
     }
 
@@ -153,13 +153,13 @@ public class Usuario {
     }
 
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Agenda getAgenda() {
+        return agenda;
     }
 
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setAgenda(Agenda agenda) {
+        this.agenda = agenda;
     }
 
 
